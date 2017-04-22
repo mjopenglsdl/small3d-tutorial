@@ -4,7 +4,7 @@ small3d Tutorial
 Getting Started
 ---------------
 
-** This tutorial will change considerably with the next release of small3d, since I am dropping support for SDL. It is only relevant to small3d v1.1.1 in its current form. **
+**This tutorial will change considerably with the next release of small3d, since I am dropping support for SDL. It is only relevant to small3d v1.1.1 in its current form.**
 
 The steps below will work on Windows, OSX/MacOS and Linux. If you encounter difficulties [let me know](https://github.com/dimi309/small3d-tutorial/issues). We are going to create a ball that can be moved using the keyboard arrows. Even though small3d is small, it can do a lot more than this. This exercise will just get you started. You can then have a look at the source code of two games that have already been developed with the engine ([Avoid the Bug 3D](https://github.com/dimi309/small3d-tutorial/tree/master/AvoidTheBug3D) and [Chase the Goat 3D](https://github.com/dimi309/small3d-tutorial/tree/master/ChaseTheGoat3D)) and maybe also build the API documentation, using Doxygen for example. The source code for this tutorial, including the model of the ball we will be creating is [available online](https://github.com/dimi309/small3d-tutorial).
 
