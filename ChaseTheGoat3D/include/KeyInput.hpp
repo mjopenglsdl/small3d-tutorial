@@ -17,7 +17,7 @@ namespace ChaseTheGoat3D
 
   typedef struct KeyInput
   {
-    bool up, down, left, right, enter, space;
+    bool up, down, left, right, enter, space, esc;
 
     KeyInput()
     {
@@ -27,6 +27,7 @@ namespace ChaseTheGoat3D
       right = false;
       enter = false;
       space = false;
+      esc = false;
     }
 
   } KeyInput;

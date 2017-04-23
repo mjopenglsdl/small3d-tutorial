@@ -62,7 +62,6 @@ namespace ChaseTheGoat3D {
 
     sound.load("resources/sounds/bah.ogg", "bah");
 
-    startTicks = 0;
     seconds = 0;
 
     lightModifier = -0.01f;
@@ -79,7 +78,8 @@ namespace ChaseTheGoat3D {
     bug.startAnimating();
     goat.startAnimating();
 
-    startTicks = SDL_GetTicks();
+
+    startSeconds = glfwGetTime();
 
   }
 
@@ -198,7 +198,7 @@ namespace ChaseTheGoat3D {
     if (goat.collidesWith(bug.offset)) {
       gameState = START_SCREEN;
       sound.play("bah", "goat");
-	  seconds = (SDL_GetTicks() - startTicks) / 1000;
+	  seconds = (glfwGetTime() - startSeconds);
     }
   }
 

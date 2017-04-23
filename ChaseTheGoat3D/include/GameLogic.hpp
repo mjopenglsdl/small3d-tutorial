@@ -31,14 +31,10 @@ namespace ChaseTheGoat3D {
 
   private:
 
-    Renderer renderer;
-
     SceneObject goat;
     SceneObject bug;
     
     SoundPlayer sound;
-	
-	
 
     enum GameState {START_SCREEN, PLAYING};
     GameState gameState;
@@ -46,7 +42,7 @@ namespace ChaseTheGoat3D {
 	enum GoatState {TURNING, WALKING_STRAIGHT};
 	GoatState goatState;
 
-    unsigned int startTicks;
+    double startSeconds;
     int seconds;
 
     void initGame();
@@ -56,6 +52,8 @@ namespace ChaseTheGoat3D {
     void moveBug(const KeyInput &keyInput);
 		
   public:
+
+    Renderer renderer;
 
     /**
      * Constructor
