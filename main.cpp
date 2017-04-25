@@ -37,11 +37,11 @@ int main(int argc, char **argv) {
 
   GLFWwindow* window = renderer.getWindow();
 
-  glfwSetKeyCallback(window, keyCallback);
-	
   SceneObject ball("ball", "resources/ball.obj");
   ball.colour = glm::vec4(1.0f, 1.0f, 0.0f, 1.0f);
   ball.offset = glm::vec3(0.0f, -1.0f, -8.0f);
+
+  glfwSetKeyCallback(window, keyCallback);
 	
   while (!glfwWindowShouldClose(window) && !esc) {
 

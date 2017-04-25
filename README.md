@@ -1,12 +1,7 @@
-small3d Tutorial
-================
+small3d - Getting Started
+=========================
 
-Getting Started
----------------
-
-**This tutorial will change considerably with the next release of small3d, since I am dropping support for SDL. It is only relevant to small3d v1.1.1 in its current form.**
-
-The steps below will work on Windows, OSX/MacOS and Linux. If you encounter difficulties [let me know](https://github.com/dimi309/small3d-tutorial/issues). We are going to create a ball that can be moved using the keyboard arrows. Even though small3d is small, it can do a lot more than this. This exercise will just get you started. You can then have a look at the source code of two games that have already been developed with the engine ([Avoid the Bug 3D](https://github.com/dimi309/small3d-tutorial/tree/master/AvoidTheBug3D) and [Chase the Goat 3D](https://github.com/dimi309/small3d-tutorial/tree/master/ChaseTheGoat3D)) and maybe also build the API documentation, using Doxygen for example. The source code for this tutorial, including the model of the ball we will be creating is [available online](https://github.com/dimi309/small3d-tutorial).
+The steps below will work on Windows, OSX/MacOS and Linux. If you encounter difficulties [let me know](https://github.com/dimi309/small3d-tutorial/issues). We are going to create a ball that can be moved using the keyboard arrows. Even though small3d is small, it can do a lot more than this. This exercise will just get you started. You can then have a look at the source code of two games that have already been developed with the engine ([Avoid the Bug 3D](https://github.com/dimi309/small3d-tutorial/tree/master/AvoidTheBug3D) and [Chase the Goat 3D](https://github.com/dimi309/small3d-tutorial/tree/master/ChaseTheGoat3D)) and maybe also build the API documentation, using Doxygen for example. The source code for this tutorial, including the model of the ball we will be creating is available in the repository.
 
 I assume that you already have your compiler set up. You also need to install [cmake](https://cmake.org) and [conan](https://www.conan.io) and make sure they can be executed from the command line. I prefer to use the engine by deploying it from conan.io and that's what I'm doing in the tutorial below.
 
@@ -57,7 +52,7 @@ Now we are ready for the code. Create a file called "main.cpp" in the "ball" dir
 Notice that we have not downloaded small3d from anywhere. Let's tell conan to do that for us. Create a file called "conanfile.txt" in the "ball" directory. Inside that file we declare small3d as our dependency:
 
 	[requires]
-	small3d/1.1.1@coding3d/stable
+	small3d/master@coding3d/stable
 
 We also need to mention that we will be working with cmake:
 
@@ -80,7 +75,7 @@ Finally, we are going to need the small3d shaders. Let's tell conan to also copy
 So the whole conanfile.txt will look like this:
 
 	[requires]
-	small3d/1.1.1@coding3d/stable
+	small3d/master@coding3d/stable
 	
 	[generators]
 	cmake
@@ -115,8 +110,16 @@ Since conan does all the hard work of gathering information about our project an
 We can now declare our executable, also linking it with the conan downloaded libraries:
 
 	ADD_EXECUTABLE(ball main.cpp)
-	TARGET_LINK_LIBRARIES(ball PUBLIC "${CONAN_LIBS}")
 
+Even though conan is already configured to find our libraries, the GLM library is a little special, so we need to look for its include files explicitly (the others are just made available by conan):
+
+	FIND_PACKAGE(GLM REQUIRED)
+	TARGET_INCLUDE_DIRECTORIES(ball PUBLIC "${GLM_INCLUDE_DIRS}")
+	
+We link the rest of the libraries:
+
+	TARGET_LINK_LIBRARIES(ball PUBLIC "${CONAN_LIBS}")
+	
 Each library may require some special link flags. Conan knows about those too, so we'll let it take care of them for us:
 
 	SET_TARGET_PROPERTIES(ball PROPERTIES LINK_FLAGS "${CONAN_EXE_LINKER_FLAGS}")
@@ -138,6 +141,10 @@ So the whole CMakeLists.txt file should look like this:
 	set(CMAKE_SHARED_LINKER_FLAGS "${CONAN_SHARED_LINKER_FLAGS}")
 	
 	ADD_EXECUTABLE(ball main.cpp)
+	
+	FIND_PACKAGE(GLM REQUIRED)
+
+	TARGET_INCLUDE_DIRECTORIES(ball PUBLIC "${GLM_INCLUDE_DIRS}")
 	TARGET_LINK_LIBRARIES(ball PUBLIC "${CONAN_LIBS}")
 	SET_TARGET_PROPERTIES(ball PROPERTIES LINK_FLAGS "${CONAN_EXE_LINKER_FLAGS}")
 	
@@ -161,9 +168,42 @@ This will compile our program. Inside the build/bin directory, there should be a
 	#include <small3d/Renderer.hpp>
 	#include <small3d/SceneObject.hpp>
 
+Now we need the GLFW header files:
+
+	#include <GLFW/glfw3.h>
+
 We also need to be using the small3d namespace, so this goes under our include statements:
 
 	using namespace small3d;
+	
+We also need to write the logic that will be detecting key presses:
+
+	bool down, left, right, up, esc, enter;
+
+	void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
+	{
+	if (key == GLFW_KEY_DOWN && action == GLFW_PRESS)
+      down = true;
+	if (key == GLFW_KEY_UP && action == GLFW_PRESS)
+      up = true;
+	if (key == GLFW_KEY_LEFT && action == GLFW_PRESS)
+      left = true;
+	if (key == GLFW_KEY_RIGHT && action == GLFW_PRESS)
+      right = true;
+	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+      esc = true;
+	if (key == GLFW_KEY_DOWN && action == GLFW_RELEASE)
+      down = false;
+	if (key == GLFW_KEY_UP && action == GLFW_RELEASE)
+      up = false;
+	if (key == GLFW_KEY_LEFT && action == GLFW_RELEASE)
+      left = false;
+	if (key == GLFW_KEY_RIGHT && action == GLFW_RELEASE)
+      right = false;
+	if (key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE)
+      esc = false;
+
+	}
 
 And finally, we go to the main program, and we create the renderer:
 
@@ -183,30 +223,30 @@ On the other hand, when positioning the ball, the components are in order, x (-l
 
 	ball.offset = glm::vec3(0.0f, -1.0f, -8.0f);
 
-So let's start our main loop now. small3d uses SDL and you can use it too! The first thing to do in every iteration, is to check whether we want to exit the program. Let's say that we'll be doing that with the Esc key:
+So let's start our main loop now. small3d uses GLFW and you can use it too! First we need to declare the callback function, which will be the keyCallback method we wrote above.
 
-	while(true){
-        SDL_Event event;
-        if (SDL_PollEvent(&event)) {
-			if (event.key.keysym.sym == SDLK_ESCAPE) {
-				break;
-			}
-	  }
+	glfwSetKeyCallback(window, keyCallback);
 
-If after that we are still in the loop (so, no Esc key pressed), we will want to move the ball around with the keyboard. We get the key state:
+Now in every iteration, we need to check whether we want to exit the program. Let's say that we'll be doing that with the Esc key:
 
-	const Uint8 *keyState = SDL_GetKeyboardState(NULL);
+	while (!glfwWindowShouldClose(window) && !esc) {
+
+	glfwPollEvents();
+		if (esc)
+			break;
+
+If after that we are still in the loop (so, no Esc key pressed), we will want to move the ball around with the keyboard. 
 
 We will have the up arrow move the ball away from the camera. Down will do the opposite. Guess what left and right will do :)
 
-	if (keyState[SDL_SCANCODE_UP] == 1)
-		ball.offset.z -= 0.1f;
-	else if (keyState[SDL_SCANCODE_DOWN] == 1)
-		ball.offset.z += 0.1f;
-	else if (keyState[SDL_SCANCODE_LEFT] == 1)
-		ball.offset.x -= 0.1f;
-	else if (keyState[SDL_SCANCODE_RIGHT] == 1)
-		ball.offset.x += 0.1f;
+	if (up)
+      ball.offset.z -= 0.1f;
+    else if (down)
+      ball.offset.z += 0.1f;
+    else if (left)
+      ball.offset.x -= 0.1f;
+    else if (right)
+      ball.offset.x += 0.1f;
 
 Ok, the ball is positioned. Now we need to actually draw it. We clear the screen first:
 
@@ -224,49 +264,7 @@ And we close the loop :)
 
 	}
 
-That's it! The whole program should look like this:
-
-	#include <small3d/Renderer.hpp>
-	#include <small3d/SceneObject.hpp>
-
-	using namespace small3d;
-	
-	int main(int argc, char **argv) {
-	
-		Renderer renderer("Ball demo");
-	
-		SceneObject ball("ball", "resources/ball.obj");
-		ball.colour = glm::vec4(1.0f, 1.0f, 0.0f, 1.0f);
-		ball.offset = glm::vec3(0.0f, -1.0f, -8.0f);
-	
-		while(true){
-	        SDL_Event event;
-	        if (SDL_PollEvent(&event)) {
-				if (event.key.keysym.sym == SDLK_ESCAPE) {
-					break;
-				}
-		  }
-	  
-		const Uint8 *keyState = SDL_GetKeyboardState(NULL);
-	
-		if (keyState[SDL_SCANCODE_UP] == 1)
-			ball.offset.z -= 0.1f;
-		else if (keyState[SDL_SCANCODE_DOWN] == 1)
-			ball.offset.z += 0.1f;
-		else if (keyState[SDL_SCANCODE_LEFT] == 1)
-			ball.offset.x -= 0.1f;
-		else if (keyState[SDL_SCANCODE_RIGHT] == 1)
-			ball.offset.x += 0.1f;
-	  
-		renderer.clearScreen();
-		renderer.render(ball);
-		renderer.swapBuffers();
-		
-		}
-	
-	return 0;
-
-	}
+That's it! Remember you can review the full listing of this program in this GitHub repository.
 
 Let's try it out:
 
@@ -285,5 +283,3 @@ There's our ball:
 ![ball](https://cloud.githubusercontent.com/assets/875167/19624720/2fb6b99e-9904-11e6-885c-504ba726eeec.png)
 
 Try moving it around with the arrows.
-
-
