@@ -1,6 +1,8 @@
 ADD_EXECUTABLE(chasethegoat3d main.cpp GameLogic.cpp)
 
-TARGET_INCLUDE_DIRECTORIES(chasethegoat3d PUBLIC "${game_SOURCE_DIR}/include")
+find_package(GLM REQUIRED)
+
+TARGET_INCLUDE_DIRECTORIES(chasethegoat3d PUBLIC "${game_SOURCE_DIR}/include" "${GLM_INCLUDE_DIRS}")
 TARGET_LINK_LIBRARIES(chasethegoat3d PUBLIC "${CONAN_LIBS}")
 
 SET_TARGET_PROPERTIES(chasethegoat3d PROPERTIES LINK_FLAGS "${CONAN_EXE_LINKER_FLAGS}")
