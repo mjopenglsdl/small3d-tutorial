@@ -111,12 +111,7 @@ We can now declare our executable, also linking it with the conan downloaded lib
 
 	ADD_EXECUTABLE(ball main.cpp)
 
-Even though conan is already configured to find our libraries, the GLM library is a little special, so we need to look for its include files explicitly (the others are just made available by conan):
-
-	FIND_PACKAGE(GLM REQUIRED)
-	TARGET_INCLUDE_DIRECTORIES(ball PUBLIC "${GLM_INCLUDE_DIRS}")
-	
-We link the rest of the libraries:
+We link the libraries (managed by conan):
 
 	TARGET_LINK_LIBRARIES(ball PUBLIC "${CONAN_LIBS}")
 	
