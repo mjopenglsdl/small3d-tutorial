@@ -25,6 +25,8 @@ On Microsoft Windows, better do it like this:
 	cmake -G "Visual Studio 14 2015 Win64" ..
 	cmake --build . --config Release
 
+*(You may need a different cmake -G command, depending on your version of Visual Studio.)*
+
 And then just execute the **chasethegoat3d** executable from the **build/bin** directory.
 
 *Runs on the [small3d](https://github.com/dimi309/small3d) game engine*
