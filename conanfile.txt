@@ -1,5 +1,5 @@
 [requires]
-small3d/master@coding3d/stable
+small3d/master@coding3d/testing
 
 [generators]
 cmake
