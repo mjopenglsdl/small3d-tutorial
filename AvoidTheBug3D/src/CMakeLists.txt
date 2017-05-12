@@ -40,5 +40,5 @@ ELSEIF(APPLE)
     SET_TARGET_PROPERTIES(avoidthebug3d PROPERTIES LINK_FLAGS
       "-framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo -framework AudioUnit -framework AudioToolbox -framework CoreAudio")
 ELSE(MSVC)
-    target_compile_options(avoidthebug3d PUBLIC "-std=c++11" "-Wl,--no-as-needed") # Avoid gcc problems in Ubuntu
+    target_compile_options(avoidthebug3d PUBLIC "-std=c++11")
 ENDIF(MSVC)
