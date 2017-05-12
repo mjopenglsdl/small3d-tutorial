@@ -2,8 +2,6 @@ add_executable(chasethegoat3d main.cpp GameLogic.cpp)
 
 target_include_directories(chasethegoat3d PUBLIC "${game_SOURCE_DIR}/include")
 
-message(STATUS "Conan libraries to link: ${CONAN_LIBS}")
-
 target_link_libraries(chasethegoat3d PUBLIC "${CONAN_LIBS}")
 
 set_target_properties(chasethegoat3d PROPERTIES LINK_FLAGS "${CONAN_EXE_LINKER_FLAGS}")
