@@ -6,4 +6,5 @@ cmake
 
 [imports]
 bin, *.dll -> ./bin
+lib, *.dylib -> ./bin
 shaders, * -> ./bin/resources/shaders
