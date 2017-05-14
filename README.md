@@ -1,7 +1,9 @@
 small3d - Getting Started
 =========================
 
-The steps below will work on Windows, OSX/MacOS and Linux. If you encounter difficulties [let me know](https://github.com/dimi309/small3d-tutorial/issues). We are going to create a ball that can be moved using the keyboard arrows. Even though small3d is small, it can do a lot more than this. This exercise will just get you started. You can then have a look at the source code of two games that have already been developed with the engine ([Avoid the Bug 3D](https://github.com/dimi309/small3d-tutorial/tree/master/AvoidTheBug3D) and [Chase the Goat 3D](https://github.com/dimi309/small3d-tutorial/tree/master/ChaseTheGoat3D)) and maybe also build the API documentation, using Doxygen for example. The source code for this tutorial, including the model of the ball we will be creating is available in the repository.
+The steps below will work on Windows, OSX/MacOS and Linux. The source code for this tutorial, including the model of a ball we will be creating, is available in this repository. If you encounter difficulties [let me know](https://github.com/dimi309/small3d-tutorial/issues).
+
+We are going to create a ball that can be moved using the keyboard arrows. Even though small3d is small, it can do a lot more than this. This exercise will just get you started. You can then have a look at the source code of two games that have already been developed with the engine ([Avoid the Bug 3D](https://github.com/dimi309/small3d-tutorial/tree/master/AvoidTheBug3D) and [Chase the Goat 3D](https://github.com/dimi309/small3d-tutorial/tree/master/ChaseTheGoat3D)). The API documentation is also [available online](http://dimi309.github.io/small3d/).
 
 I assume that you already have your compiler set up. You also need to install [cmake](https://cmake.org) and [conan](https://www.conan.io) and make sure they can be executed from the command line. I prefer to use the engine by deploying it from conan.io and that's what I'm doing in the tutorial below.
 
@@ -93,58 +95,44 @@ Let's see if it works. We are going to be building in a separate directory, in o
 
 Conan will download small3d and all libraries that it depends on and place them in a local cache. It will also create its own cmake configuration file (conanbuildinfo.cmake) and, as instructed, copy small3d's shaders to the bin/resources/shaders directory. We are now ready to create our cmake configuration. Back inside the "ball" directory, let's create a CMakeLists.txt file. We will set the minimum required cmake version and declare our project:
 
-	CMAKE_MINIMUM_REQUIRED(VERSION 3.0.2)
-	PROJECT(demo)
+	cmake_minimum_required(VERSION 3.0.2)
+	project(demo)
 
 Then we will link our project with conan, by including the conan cmake configuration created in the previous step and then setting up conan with a command contained in it:
 
-	INCLUDE(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
-	CONAN_BASIC_SETUP()
-
-Since conan does all the hard work of gathering information about our project and environment, let's use that to set up the flags for our build:
-
-	set(CMAKE_C_FLAGS "${CONAN_C_FLAGS}")
-	set(CMAKE_CXX_FLAGS "${CONAN_CXX_FLAGS}")
-	set(CMAKE_SHARED_LINKER_FLAGS "${CONAN_SHARED_LINKER_FLAGS}")
+	include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
+	conan_basic_setup()
 
 We can now declare our executable, also linking it with the conan downloaded libraries:
 
-	ADD_EXECUTABLE(ball main.cpp)
+	add_executable(ball main.cpp)
 
 We link the libraries (managed by conan):
 
-	TARGET_LINK_LIBRARIES(ball PUBLIC "${CONAN_LIBS}")
+	target_link_libraries(ball PUBLIC "${CONAN_LIBS}")
 	
 Each library may require some special link flags. Conan knows about those too, so we'll let it take care of them for us:
 
-	SET_TARGET_PROPERTIES(ball PROPERTIES LINK_FLAGS "${CONAN_EXE_LINKER_FLAGS}")
+	set_target_properties(ball PROPERTIES LINK_FLAGS "${CONAN_EXE_LINKER_FLAGS}")
 
 And, finally, in order for our compiled program to be able to easily access our ball model, which we created earlier, let's have it copied by cmake to the binary output directory:
 
-	FILE(COPY "resources" DESTINATION "${PROJECT_BINARY_DIR}/bin")
+	file(copy "resources" DESTINATION "${PROJECT_BINARY_DIR}/bin")
 
 So the whole CMakeLists.txt file should look like this:
 
-	CMAKE_MINIMUM_REQUIRED(VERSION 3.0.2)
-	PROJECT(demo)
-	
-	INCLUDE(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
-	CONAN_BASIC_SETUP()
-	
-	set(CMAKE_C_FLAGS "${CONAN_C_FLAGS}")
-	set(CMAKE_CXX_FLAGS "${CONAN_CXX_FLAGS}")
-	set(CMAKE_SHARED_LINKER_FLAGS "${CONAN_SHARED_LINKER_FLAGS}")
-	
-	ADD_EXECUTABLE(ball main.cpp)
-	
-	FIND_PACKAGE(GLM REQUIRED)
+	cmake_minimum_required(VERSION 3.0.2)
+	project(demo)
 
-	TARGET_INCLUDE_DIRECTORIES(ball PUBLIC "${GLM_INCLUDE_DIRS}")
-	TARGET_LINK_LIBRARIES(ball PUBLIC "${CONAN_LIBS}")
-	SET_TARGET_PROPERTIES(ball PROPERTIES LINK_FLAGS "${CONAN_EXE_LINKER_FLAGS}")
-	
-	FILE(COPY "resources" DESTINATION "${PROJECT_BINARY_DIR}/bin")
-	
+	include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
+	conan_basic_setup()
+
+	add_executable(ball main.cpp)
+
+	target_link_libraries(ball PUBLIC "${CONAN_LIBS}")
+	set_target_properties(ball PROPERTIES LINK_FLAGS "${CONAN_EXE_LINKER_FLAGS}")
+
+	file(COPY "resources" DESTINATION "${PROJECT_BINARY_DIR}/bin")
 
 Let's see if everything works:
 
