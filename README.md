@@ -253,13 +253,17 @@ Let's try it out:
 
 	cd build
 	cmake --build .
-	./bin/ball
+	cd bin
+	./ball
+
+Note that you have to be inside the build/bin directory in order to execute the program, otherwise it will not find the necessary resource files (shaders, textures, etc).
 
 For Windows:
 
 	cd build
 	cmake --build . --config Release
-	.\bin\ball.exe
+	cd bin
+	ball.exe
 
 There's our ball:
 
