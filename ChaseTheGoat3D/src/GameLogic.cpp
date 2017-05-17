@@ -48,6 +48,9 @@ namespace ChaseTheGoat3D {
     renderer.generateTexture("startScreen", startScreenTexture.getData(), startScreenTexture.getWidth(),
                              startScreenTexture.getHeight());
 
+    Image groundTexture("resources/images/grass.png");
+    renderer.generateTexture("ground", groundTexture.getData(), groundTexture.getWidth(), groundTexture.getHeight());
+
     Image skyTexture("resources/images/sky.png");
     renderer.generateTexture("sky", skyTexture.getData(), skyTexture.getWidth(), skyTexture.getHeight());
 
@@ -244,8 +247,8 @@ namespace ChaseTheGoat3D {
 
       // Draw the background
 			 
-      renderer.renderSurface(glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3(-25.0f, GROUND_Y, MAX_Z),
-			     glm::vec3(25.0f, GROUND_Y, MIN_Z));
+      renderer.renderTexture("ground", glm::vec3(-25.0f, GROUND_Y, MAX_Z),
+		  	 glm::vec3(25.0f, GROUND_Y, MIN_Z), true);
 
       renderer.render(goat);
       renderer.render(bug);
