@@ -54,13 +54,6 @@ namespace AvoidTheBug3D {
     renderer.generateTexture("startScreen", startScreenTexture.getData(), startScreenTexture.getWidth(),
                              startScreenTexture.getHeight());
 
-    Image groundTexture("resources/images/grass.png");
-    renderer.generateTexture("ground", groundTexture.getData(), groundTexture.getWidth(),
-                             groundTexture.getHeight());
-
-    Image skyTexture("resources/images/sky.png");
-    renderer.generateTexture("sky", skyTexture.getData(), skyTexture.getWidth(), skyTexture.getHeight());
-
     bug.colour = glm::vec4(0.2f, 0.2f, 0.2f, 1.0f);
     bug.setFrameDelay(2);
     bugVerticalSpeed = ROUND_2_DECIMAL(BUG_FLIGHT_HEIGHT / BUG_DIVE_DURATION);
@@ -312,12 +305,12 @@ namespace AvoidTheBug3D {
 
     } else {
 
-      renderer.renderTexture("sky", glm::vec3(-1.0f, -1.0f, 1.0f),
+      renderer.renderSurface(glm::vec3(1.0f, 1.0f, 0.0f), glm::vec3(-1.0f, -1.0f, 1.0f),
 	  	 glm::vec3(1.0f, 1.0f, 1.0f));
 
       // Draw the background
 
-      renderer.renderTexture("ground", glm::vec3(-25.0f, GROUND_Y, MAX_Z),
+      renderer.renderSurface(glm::vec3(0.0f, 0.5f, 0.0f), glm::vec3(-25.0f, GROUND_Y, MAX_Z),
 	  	 glm::vec3(25.0f, GROUND_Y, MIN_Z), true);
 
       renderer.render(goat);
