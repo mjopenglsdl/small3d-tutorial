@@ -1,6 +1,6 @@
-ADD_EXECUTABLE(avoidthebug3d main.cpp GameLogic.cpp)
+add_executable(avoidthebug3d main.cpp GameLogic.cpp)
 
-INCLUDE_DIRECTORIES(
+include_directories(
   ${OPENGL_INCLUDE_DIR}
   ${GLFW_INCLUDE_DIRS}
   ${PNG_INCLUDE_DIRS}
@@ -14,9 +14,9 @@ INCLUDE_DIRECTORIES(
   "${PROJECT_SOURCE_DIR}/include"
   )
 
-ADD_DEFINITIONS(${PNG_DEFINITIONS})
+add_definitions(${PNG_DEFINITIONS})
 
-TARGET_LINK_LIBRARIES(avoidthebug3d PUBLIC
+target_link_libraries(avoidthebug3d PUBLIC
   ${OPENGL_LIBRARIES}
   ${GLFW_LIBRARIES}
   ${GLEW_LIBRARIES}
@@ -28,17 +28,17 @@ TARGET_LINK_LIBRARIES(avoidthebug3d PUBLIC
   ${SMALL3D_LIBRARY}
   )
 
-IF(NOT WIN32)
-  TARGET_LINK_LIBRARIES(avoidthebug3d PUBLIC ${BZIP2_LIBRARIES})
-ENDIF()
+if(NOT WIN32)
+  target_link_libraries(avoidthebug3d PUBLIC ${BZIP2_LIBRARIES})
+endif()
 
-IF(MSVC)
-  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /EHsc")
-  SET_TARGET_PROPERTIES(avoidthebug3d PROPERTIES LINK_FLAGS_RELEASE "/NODEFAULTLIB:MSVCRTD")  
-ELSEIF(APPLE)
-    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -stdlib=libc++")
-    SET_TARGET_PROPERTIES(avoidthebug3d PROPERTIES LINK_FLAGS
+if(MSVC)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /EHsc")
+  set_target_properties(avoidthebug3d PROPERTIES LINK_FLAGS_RELEASE "/NODEFAULTLIB:MSVCRTD")  
+elseif(APPLE)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -stdlib=libc++")
+    set_target_properties(avoidthebug3d PROPERTIES LINK_FLAGS
       "-framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo -framework AudioUnit -framework AudioToolbox -framework CoreAudio")
-ELSE(MSVC)
+else(MSVC)
     target_compile_options(avoidthebug3d PUBLIC "-std=c++11")
-ENDIF(MSVC)
+endif(MSVC)
