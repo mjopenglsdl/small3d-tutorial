@@ -305,7 +305,7 @@ namespace AvoidTheBug3D {
 
     } else {
 
-      renderer.renderSurface(glm::vec3(1.0f, 1.0f, 0.0f), glm::vec3(-1.0f, -1.0f, 1.0f),
+      renderer.renderSurface(glm::vec3(0.2f, 0.2f, 0.8f), glm::vec3(-1.0f, -1.0f, 1.0f),
 	  	 glm::vec3(1.0f, 1.0f, 1.0f));
 
       // Draw the background
