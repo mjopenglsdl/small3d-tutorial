@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.8.1)
+cmake_minimum_required(VERSION 3.0.2)
 project(game)
 
   set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${game_BINARY_DIR}/bin")
