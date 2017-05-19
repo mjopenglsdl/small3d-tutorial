@@ -179,7 +179,7 @@ namespace AvoidTheBug3D {
     if (bugState == DIVING_DOWN) {
       if (goat.collidesWith(bug.offset)) {
         sound.play("bah", "goat");
-        seconds = (glfwGetTime() - startSeconds);
+        seconds = static_cast<int>(glfwGetTime() - startSeconds);
         gameState = START_SCREEN;
       }
 
@@ -305,11 +305,11 @@ namespace AvoidTheBug3D {
 
     } else {
 
-      renderer.renderSurface(glm::vec3(0.2f, 0.2f, 0.8f), glm::vec3(-1.0f, -1.0f, 1.0f),
+      // Draw the sky
+      renderer.renderSurface(glm::vec3(0.4f, 0.37f, 1.0f), glm::vec3(-1.0f, -1.0f, 1.0f),
 	  	 glm::vec3(1.0f, 1.0f, 1.0f));
 
-      // Draw the background
-
+      // Draw the ground
       renderer.renderSurface(glm::vec3(0.0f, 0.5f, 0.0f), glm::vec3(-25.0f, GROUND_Y, MAX_Z),
 	  	 glm::vec3(25.0f, GROUND_Y, MIN_Z), true);
 
