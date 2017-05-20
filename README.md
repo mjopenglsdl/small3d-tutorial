@@ -188,9 +188,13 @@ We also need to write the logic that will be detecting key presses:
 
 	}
 
-And finally, we go to the main program, and we create the renderer:
+And finally, we go to the main program, and we create the renderer. The renderer is a singleton, so it can only be retrieved via the getInstance method, and assigned to a pointer:
 
-	Renderer renderer("Ball demo");
+	Renderer *renderer = &Renderer::getInstance("Ball demo");
+    
+We will later need to access the window of the application, in order to pick up key events:
+
+    GLFWwindow* window = renderer->getWindow();
 
 We create the ball:
 
@@ -233,15 +237,15 @@ We will have the up arrow move the ball away from the camera. Down will do the o
 
 Ok, the ball is positioned. Now we need to actually draw it. We clear the screen first:
 
-	renderer.clearScreen();
+	renderer->clearScreen();
 
 Then we render the ball:
 	
-	renderer.render(ball);
+	renderer->render(ball);
 
 We are using a double-buffered system (we draw on one buffer, while the user is looking at the other one), so we also need to swap the buffers:
 
-	renderer.swapBuffers();
+	renderer->swapBuffers();
 
 And we close the loop :)
 
