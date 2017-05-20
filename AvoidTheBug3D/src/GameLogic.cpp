@@ -35,14 +35,14 @@ using namespace small3d;
 namespace AvoidTheBug3D {
 
   GameLogic::GameLogic() :
-      renderer("Avoid the Bug 3D", 854, 480),
       goat("goat", "resources/models/Goat/goatAnim",
            19, "resources/models/Goat/Goat.png",
            "resources/models/GoatBB/GoatBB.obj"),
       bug("bug", "resources/models/Bug/bugAnim", 9),
       tree("tree", "resources/models/Tree/tree.obj",
            1, "resources/models/Tree/tree.png",
-           "resources/models/TreeBB/TreeBB.obj") {
+           "resources/models/TreeBB/TreeBB.obj"),
+      renderer("Avoid the Bug 3D", 854, 480){
 
     renderer.cameraPosition = glm::vec3(0.0f, 0.0f, 0.0f);
 
