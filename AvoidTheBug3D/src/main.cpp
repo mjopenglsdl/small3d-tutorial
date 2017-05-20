@@ -73,8 +73,7 @@ int main(int argc, char **argv) {
     GameLogic gameLogic;
 
     // program main loop
-    bool done = false;
-
+    
     // seconds, for setting the framerate
     double seconds = glfwGetTime();
     double prevSeconds = seconds;
