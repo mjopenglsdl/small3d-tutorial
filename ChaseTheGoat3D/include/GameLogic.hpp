@@ -34,7 +34,7 @@ namespace ChaseTheGoat3D {
     SceneObject goat;
     SceneObject bug;
     
-    SoundPlayer sound;
+    SoundPlayer *sound;
 
     enum GameState {START_SCREEN, PLAYING};
     GameState gameState;
@@ -53,7 +53,7 @@ namespace ChaseTheGoat3D {
 		
   public:
 
-    Renderer renderer;
+    Renderer *renderer;
 
     /**
      * Constructor

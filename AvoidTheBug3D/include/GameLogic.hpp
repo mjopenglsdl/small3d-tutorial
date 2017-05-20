@@ -33,7 +33,7 @@ namespace AvoidTheBug3D {
 
     SceneObject goat, bug, tree;
     
-    SoundPlayer sound;
+    SoundPlayer *sound;
 
     enum GameState {
       START_SCREEN, PLAYING
@@ -62,7 +62,7 @@ namespace AvoidTheBug3D {
 
   public:
 
-    Renderer renderer;
+    Renderer *renderer;
 
     /**
      * Constructor

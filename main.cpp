@@ -33,9 +33,9 @@ void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods
 	
 int main(int argc, char **argv) {
 	
-  Renderer renderer("Ball demo");
+  Renderer *renderer = &Renderer::getInstance("Ball demo");
 
-  GLFWwindow* window = renderer.getWindow();
+  GLFWwindow* window = renderer->getWindow();
 
   SceneObject ball("ball", "resources/ball.obj");
   ball.colour = glm::vec4(1.0f, 1.0f, 0.0f, 1.0f);
@@ -58,9 +58,9 @@ int main(int argc, char **argv) {
     else if (right)
       ball.offset.x += 0.1f;
 	  
-    renderer.clearScreen();
-    renderer.render(ball);
-    renderer.swapBuffers();
+    renderer->clearScreen();
+    renderer->render(ball);
+    renderer->swapBuffers();
 		
   }
 	

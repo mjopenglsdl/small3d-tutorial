@@ -38,21 +38,24 @@ namespace ChaseTheGoat3D {
   goat("goat", "resources/models/Goat/goatAnim",
        19, "resources/models/Goat/Goat.png",
        "resources/models/GoatBB/GoatBB.obj"),
-  bug("bug", "resources/models/Bug/bugAnim", 9),
-  renderer("Chase the Goat 3D", 0, 0, 1.2f){
+  bug("bug", "resources/models/Bug/bugAnim", 9){
+    
+    renderer = &Renderer::getInstance("Chase the Goat 3D", 0, 0, 1.2f);
+    sound = &SoundPlayer::getInstance();
+    
     bug.adjustRotation(glm::vec3(0.0f, 1.57f, 0.0f));
     goat.adjustRotation(glm::vec3(0.0f, 1.57f, 0.0f));
     
     Image startScreenTexture("resources/images/startScreen.png");
     
-    renderer.generateTexture("startScreen", startScreenTexture.getData(), startScreenTexture.getWidth(),
+    renderer->generateTexture("startScreen", startScreenTexture.getData(), startScreenTexture.getWidth(),
                              startScreenTexture.getHeight());
     
     Image groundTexture("resources/images/grass.png");
-    renderer.generateTexture("ground", groundTexture.getData(), groundTexture.getWidth(), groundTexture.getHeight());
+    renderer->generateTexture("ground", groundTexture.getData(), groundTexture.getWidth(), groundTexture.getHeight());
     
     Image skyTexture("resources/images/sky.png");
-    renderer.generateTexture("sky", skyTexture.getData(), skyTexture.getWidth(), skyTexture.getHeight());
+    renderer->generateTexture("sky", skyTexture.getData(), skyTexture.getWidth(), skyTexture.getHeight());
     
     
     bug.colour = glm::vec4(0.2f, 0.2f, 0.2f, 1.0f);
@@ -60,7 +63,7 @@ namespace ChaseTheGoat3D {
     
     gameState = START_SCREEN;
     
-    sound.load("resources/sounds/bah.ogg", "bah");
+    sound->load("resources/sounds/bah.ogg", "bah");
     
     seconds = 0;
     
@@ -185,19 +188,19 @@ namespace ChaseTheGoat3D {
     
     
     // Bug chase camera
-    renderer.cameraPosition = bug.offset;
-    renderer.cameraPosition.x -= sin(bug.rotation.y) * 1.7f;
-    renderer.cameraPosition.z += cos(bug.rotation.y) * 1.7f;
-    renderer.cameraPosition.y += sin(bug.rotation.x) * 1.7f;
-    renderer.cameraRotation = bug.rotation;
-    if (renderer.cameraPosition.y < GROUND_Y + 1.0f)
-      renderer.cameraPosition.y = GROUND_Y + 1.0f;
+    renderer->cameraPosition = bug.offset;
+    renderer->cameraPosition.x -= sin(bug.rotation.y) * 1.7f;
+    renderer->cameraPosition.z += cos(bug.rotation.y) * 1.7f;
+    renderer->cameraPosition.y += sin(bug.rotation.x) * 1.7f;
+    renderer->cameraRotation = bug.rotation;
+    if (renderer->cameraPosition.y < GROUND_Y + 1.0f)
+      renderer->cameraPosition.y = GROUND_Y + 1.0f;
     
     bug.animate();
     
     if (goat.collidesWith(bug.offset)) {
       gameState = START_SCREEN;
-      sound.play("bah", "goat");
+      sound->play("bah", "goat");
       seconds = (glfwGetTime() - startSeconds);
     }
   }
@@ -228,33 +231,33 @@ namespace ChaseTheGoat3D {
   }
   
   void GameLogic::render() {
-    renderer.clearScreen();
+    renderer->clearScreen();
     
     if (gameState == START_SCREEN) {
       
-      renderer.renderTexture("startScreen", glm::vec3(-1.0f, -1.0f, 1.0f),
+      renderer->renderTexture("startScreen", glm::vec3(-1.0f, -1.0f, 1.0f),
                              glm::vec3(1.0f, 1.0f, 1.0f));
       
       if (seconds != 0) {
-        renderer.write("Goat not bitten for " + intToStr(seconds) + " seconds",
+        renderer->write("Goat not bitten for " + intToStr(seconds) + " seconds",
                        glm::vec3(1.0f, 0.5f, 0.0f), glm::vec2(-0.95f, -0.8f), glm::vec2(0.0f, -0.6f));
       }
       
     } else {
       
-      renderer.renderTexture("sky", glm::vec3(-1.0f, -1.0f, 1.0f),
+      renderer->renderTexture("sky", glm::vec3(-1.0f, -1.0f, 1.0f),
                              glm::vec3(1.0f, 1.0f, 1.0f));
       
       // Draw the background
       
-      renderer.renderTexture("ground", glm::vec3(-25.0f, GROUND_Y, MAX_Z),
+      renderer->renderTexture("ground", glm::vec3(-25.0f, GROUND_Y, MAX_Z),
                              glm::vec3(25.0f, GROUND_Y, MIN_Z), true);
       
-      renderer.render(goat);
-      renderer.render(bug);
+      renderer->render(goat);
+      renderer->render(bug);
       
     }
-    renderer.swapBuffers();
+    renderer->swapBuffers();
   }
   
 }
