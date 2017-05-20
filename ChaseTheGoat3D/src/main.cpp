@@ -63,21 +63,10 @@ void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods
 
 
 int main(int argc, char **argv) {
-  // Set up a console, if using MinGW
-  // This is because the mwindows linker flag,
-  // used by blocks referenced by small3d,
-  // eliminates the default one.
-#ifdef __MINGW32__
-  AllocConsole();
-  freopen("CONOUT$", "w", stdout);
-#endif
 
   try {
     initLogger();
     GameLogic gameLogic;
-
-    // program main loop
-    bool done = false;
 
     // seconds, for setting the framerate
     double seconds = glfwGetTime();
