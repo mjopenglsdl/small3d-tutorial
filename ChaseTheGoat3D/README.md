@@ -5,6 +5,10 @@ Chase the Goat 3D
 
 Chase the goat. Accelerate using the spacebar and navigate using the arrow keys.
 
+Before proceeding, please note that conan packages will be stored on bintray.com in the future. I have already made the switch so, just once, if you have not already done so, you need to declare my bintray repository as a remote, so that you can download the referenced packages:
+
+    conan remote add bintraydimi309 https://api.bintray.com/conan/dimi309/conan-packages
+
 On MacOS or Linux, build as follows, using the [conan](https://www.conan.io) package manager:
 
 	git clone https://github.com/compiletoplay/ChaseTheGoat3D

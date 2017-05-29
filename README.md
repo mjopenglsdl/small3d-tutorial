@@ -77,7 +77,7 @@ Finally, we are going to need the small3d shaders. Let's tell conan to also copy
 So the whole conanfile.txt will look like this:
 
 	[requires]
-	small3d/master@coding3d/stable
+	small3d/master@dimi309/stable
 	
 	[generators]
 	cmake
@@ -87,7 +87,11 @@ So the whole conanfile.txt will look like this:
 	shaders, * -> ./bin/resources/shaders
 	
 
-Let's see if it works. We are going to be building in a separate directory, in order to keep things clean. From inside the "ball" directory, execute:
+Let's see if it works. First of all, please note that conan packages will be stored on bintray.com in the future. I have already made the switch so, just once, if you have not already done so, you need to declare my bintray repository as a remote, so that you can download the relevant packages:
+
+    conan remote add bintraydimi309 https://api.bintray.com/conan/dimi309/conan-packages
+
+We are going to be building in a separate directory, in order to keep things clean. From inside the "ball" directory, execute:
 
 	mkdir build
 	cd build
