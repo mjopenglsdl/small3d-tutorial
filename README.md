@@ -61,17 +61,19 @@ We also need to mention that we will be working with cmake:
 	[generators]
 	cmake
 
-For Windows, we will need the dlls of the libraries we are using (small3d and its dependencies will be automatically downloaded by conan and some of them are not configured to be statically linked) to be copied to our binary output directory. Let's tell conan to take care of that for us:
+For Windows and MacOS/OSX, we will need the dynamic libraries we are using (small3d and its dependencies will be automatically downloaded by conan and some of them are not configured to be statically linked) to be copied to our binary output directory. Let's tell conan to take care of that for us:
 
 	[imports]
 	bin, *.dll -> ./bin
+    lib, *.dylib -> ./bin
 
-If you don't use Windows, you can still add that to your conanfile. It will allow your program to compile and run on Windows, should you ever want to do that and, on any other system, it will cause no problem since conan will not crash or anything if it doesn't find any dlls. It just won't copy them.
+If you don't use Windows or MacOS, you can still add that to your conanfile. It will allow your program to compile and run on those operating systems, should you ever want to do that and, on any other system, it will cause no problem since conan will not crash or anything if it doesn't find these files.
 
 Finally, we are going to need the small3d shaders. Let's tell conan to also copy those, under [imports]:
 
 	[imports]
 	bin, *.dll -> ./bin
+    lib, *.dylib -> ./bin
 	shaders, * -> ./bin/resources/shaders
 
 So the whole conanfile.txt will look like this:
