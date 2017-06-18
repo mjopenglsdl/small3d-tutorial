@@ -5,7 +5,7 @@ The steps below will work on Windows, OSX/MacOS and Linux. The source code for t
 
 We are going to create a ball that can be moved using the keyboard arrows. Even though small3d is small, it can do a lot more than this. This exercise will just get you started. You can then have a look at the source code of two games that have already been developed with the engine ([Avoid the Bug 3D](https://github.com/dimi309/small3d-tutorial/tree/master/AvoidTheBug3D) and [Chase the Goat 3D](https://github.com/dimi309/small3d-tutorial/tree/master/ChaseTheGoat3D)). The API documentation is also [available online](http://dimi309.github.io/small3d/).
 
-I assume that you already have your compiler set up. You also need to install [cmake](https://cmake.org) and [conan](https://www.conan.io) and make sure they can be executed from the command line. I prefer to use the engine by deploying it from conan.io and that's what I'm doing in the tutorial below.
+I assume that you already have your compiler set up. You also need to install [cmake](https://cmake.org) and [conan](https://www.conan.io) and make sure they can be executed from the command line.
 
 To begin with, let's make a directory for our ball-moving masterpiece from the command line:
 
