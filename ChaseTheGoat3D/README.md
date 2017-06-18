@@ -11,8 +11,8 @@ Before proceeding, please note that conan packages will be stored on bintray.com
 
 On MacOS or Linux, build as follows, using the [conan](https://www.conan.io) package manager:
 
-	git clone https://github.com/compiletoplay/ChaseTheGoat3D
-	cd ChaseTheGoat3D
+	git clone https://github.com/dimi309/small3d-tutorial
+	cd small3d-tutorial/ChaseTheGoat3D
 	mkdir build
 	cd build
 	conan install .. --build missing
@@ -21,8 +21,8 @@ On MacOS or Linux, build as follows, using the [conan](https://www.conan.io) pac
 
 On Microsoft Windows, better do it like this:
 
-	git clone https://github.com/compiletoplay/ChaseTheGoat3D
-	cd ChaseTheGoat3D
+	git clone https://github.com/dimi309/small3d-tutorial
+	cd small3d-tutorial/ChaseTheGoat3D
 	mkdir build
 	cd build
 	conan install .. --build missing
