@@ -25,7 +25,7 @@
 
 #include <memory>
 #include <small3d/MathFunctions.hpp>
-#include <small3d/Exception.hpp>
+#include <stdexcept>
 #include <cmath>
 #include "GameLogic.hpp"
 
@@ -272,7 +272,7 @@ namespace AvoidTheBug3D {
         processGame(keyInput);
         break;
       default:
-        throw Exception("Urecognised game state");
+        throw std::runtime_error("Urecognised game state");
         break;
     }
   }

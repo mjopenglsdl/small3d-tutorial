@@ -13,7 +13,7 @@
 
 #include <cstdlib>
 #include <iostream>
-#include <small3d/Exception.hpp>
+#include <stdexcept>
 
 #include "GameLogic.hpp"
 #include "KeyInput.hpp"
@@ -89,7 +89,7 @@ int main(int argc, char **argv) {
       }
     }
   }
-  catch (Exception &e) {
+  catch (std::runtime_error &e) {
     LOGERROR(e.what());
     return EXIT_FAILURE;
   }

@@ -13,7 +13,7 @@
 
 #include <cstdlib>
 #include <iostream>
-#include <small3d/Exception.hpp>
+#include <stdexcept>
 #include <memory>
 
 #include "GameLogic.hpp"
@@ -87,7 +87,7 @@ int main(int argc, char **argv) {
       }
     }
   }
-  catch (Exception &e) {
+  catch (runtime_error &e) {
     LOGERROR(e.what());
     return EXIT_FAILURE;
   }

@@ -26,7 +26,7 @@
 
 #include <memory>
 #include <small3d/MathFunctions.hpp>
-#include <small3d/Exception.hpp>
+#include <stdexcept>
 #include "GameLogic.hpp"
 
 
@@ -226,7 +226,7 @@ namespace ChaseTheGoat3D {
         processGame(keyInput);
         break;
       default:
-        throw Exception("Urecognised game state");
+        throw std::exception("Urecognised game state");
     }
   }
   
