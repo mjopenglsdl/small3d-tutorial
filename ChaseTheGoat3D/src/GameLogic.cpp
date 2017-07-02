@@ -38,10 +38,10 @@ namespace ChaseTheGoat3D {
   goat("goat", "resources/models/Goat/goatAnim",
        19, "resources/models/Goat/Goat.png",
        "resources/models/GoatBB/GoatBB.obj"),
-  bug("bug", "resources/models/Bug/bugAnim", 9){
+  bug("bug", "resources/models/Bug/bugAnim", 9),
+  bahSound("resources/sounds/bah.ogg"){
     
     renderer = &Renderer::getInstance("Chase the Goat 3D", 0, 0, 1.2f);
-    sound = &SoundPlayer::getInstance();
     
     bug.adjustRotation(glm::vec3(0.0f, 1.57f, 0.0f));
     goat.adjustRotation(glm::vec3(0.0f, 1.57f, 0.0f));
@@ -62,8 +62,6 @@ namespace ChaseTheGoat3D {
     bug.setFrameDelay(2);
     
     gameState = START_SCREEN;
-    
-    sound->load("resources/sounds/bah.ogg", "bah");
     
     seconds = 0;
     
@@ -200,7 +198,7 @@ namespace ChaseTheGoat3D {
     
     if (goat.collidesWith(bug.offset)) {
       gameState = START_SCREEN;
-      sound->play("bah", "goat");
+      bahSound.play();
       seconds = (glfwGetTime() - startSeconds);
     }
   }

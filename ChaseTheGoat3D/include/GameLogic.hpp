@@ -12,7 +12,7 @@
 #include <small3d/Logger.hpp>
 #include <small3d/SceneObject.hpp>
 #include <small3d/Renderer.hpp>
-#include <small3d/SoundPlayer.hpp>
+#include <small3d/Sound.hpp>
 
 #include "KeyInput.hpp"
 
@@ -34,7 +34,7 @@ namespace ChaseTheGoat3D {
     SceneObject goat;
     SceneObject bug;
     
-    SoundPlayer *sound;
+    Sound bahSound;
 
     enum GameState {START_SCREEN, PLAYING};
     GameState gameState;

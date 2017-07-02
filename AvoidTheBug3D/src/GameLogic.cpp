@@ -41,10 +41,10 @@ namespace AvoidTheBug3D {
   bug("bug", "resources/models/Bug/bugAnim", 9),
   tree("tree", "resources/models/Tree/tree.obj",
        1, "resources/models/Tree/tree.png",
-       "resources/models/TreeBB/TreeBB.obj"){
+       "resources/models/TreeBB/TreeBB.obj"),
+  bahSound("resources/sounds/bah.ogg"){
     
     renderer = &Renderer::getInstance("Avoid the Bug 3D", 854, 480);
-    sound = &SoundPlayer::getInstance();
     
     renderer->cameraPosition = glm::vec3(0.0f, 0.0f, 0.0f);
     
@@ -64,8 +64,6 @@ namespace AvoidTheBug3D {
     tree.rotation = glm::vec3(0.0f, -0.5f, 0.0f);
     
     gameState = START_SCREEN;
-    
-    sound->load("resources/sounds/bah.ogg", "bah");
     
     startSeconds = 0;
     seconds = 0;
@@ -180,7 +178,7 @@ namespace AvoidTheBug3D {
     
     if (bugState == DIVING_DOWN) {
       if (goat.collidesWith(bug.offset)) {
-        sound->play("bah", "goat");
+        bahSound.play();
         seconds = static_cast<int>(glfwGetTime() - startSeconds);
         gameState = START_SCREEN;
       }
