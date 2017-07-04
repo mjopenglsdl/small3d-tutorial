@@ -53,8 +53,7 @@ namespace AvoidTheBug3D {
     
     
     Image startScreenTexture("resources/images/startScreen.png");
-    renderer->generateTexture("startScreen", startScreenTexture.getData(), startScreenTexture.getWidth(),
-                              startScreenTexture.getHeight());
+    renderer->generateTexture("startScreen", startScreenTexture);
     
     bug.colour = glm::vec4(0.2f, 0.2f, 0.2f, 1.0f);
     bug.setFrameDelay(2);

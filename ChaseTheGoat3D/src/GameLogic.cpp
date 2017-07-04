@@ -48,14 +48,13 @@ namespace ChaseTheGoat3D {
     
     Image startScreenTexture("resources/images/startScreen.png");
     
-    renderer->generateTexture("startScreen", startScreenTexture.getData(), startScreenTexture.getWidth(),
-                             startScreenTexture.getHeight());
+    renderer->generateTexture("startScreen", startScreenTexture);
     
     Image groundTexture("resources/images/grass.png");
-    renderer->generateTexture("ground", groundTexture.getData(), groundTexture.getWidth(), groundTexture.getHeight());
+    renderer->generateTexture("ground", groundTexture);
     
     Image skyTexture("resources/images/sky.png");
-    renderer->generateTexture("sky", skyTexture.getData(), skyTexture.getWidth(), skyTexture.getHeight());
+    renderer->generateTexture("sky", skyTexture);
     
     
     bug.colour = glm::vec4(0.2f, 0.2f, 0.2f, 1.0f);
