@@ -224,7 +224,7 @@ namespace ChaseTheGoat3D {
         processGame(keyInput);
         break;
       default:
-        throw std::exception("Urecognised game state");
+        throw std::runtime_error("Urecognised game state");
     }
   }
   
