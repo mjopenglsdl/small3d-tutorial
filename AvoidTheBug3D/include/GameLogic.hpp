@@ -13,6 +13,7 @@
 #include <small3d/SceneObject.hpp>
 #include <small3d/Renderer.hpp>
 #include <small3d/Sound.hpp>
+#include <small3d/WavefrontLoader.hpp>
 
 #include "KeyInput.hpp"
 
@@ -31,7 +32,7 @@ namespace AvoidTheBug3D {
 
   private:
 
-    SceneObject goat, bug, tree;
+    SceneObject<WavefrontLoader> goat, bug, tree;
     
     Sound bahSound;
 

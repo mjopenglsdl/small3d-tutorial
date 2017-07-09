@@ -35,22 +35,16 @@ using namespace small3d;
 namespace AvoidTheBug3D {
   
   GameLogic::GameLogic() :
-  goat("goat", "resources/models/Goat/goatAnim",
-       19, "resources/models/Goat/Goat.png",
-       "resources/models/GoatBB/GoatBB.obj"),
-  bug("bug", "resources/models/Bug/bugAnim", 9),
-  tree("tree", "resources/models/Tree/tree.obj",
-       1, "resources/models/Tree/tree.png",
-       "resources/models/TreeBB/TreeBB.obj"),
-  bahSound("resources/sounds/bah.ogg"){
+    goat("goat", "resources/models/Goat/goatAnim",
+	 19, "resources/models/GoatBB/GoatBB.obj"),
+    bug("bug", "resources/models/Bug/bugAnim", 9),
+    tree("tree", "resources/models/Tree/tree.obj",
+	 1, "resources/models/TreeBB/TreeBB.obj"),
+    bahSound("resources/sounds/bah.ogg"){
     
     renderer = &Renderer::getInstance("Avoid the Bug 3D", 854, 480);
     
     renderer->cameraPosition = glm::vec3(0.0f, 0.0f, 0.0f);
-    
-    bug.adjustRotation(glm::vec3(0.0f, 1.57f, 0.0f));
-    goat.adjustRotation(glm::vec3(0.0f, 1.57f, 0.0f));
-    
     
     Image startScreenTexture("resources/images/startScreen.png");
     renderer->generateTexture("startScreen", startScreenTexture);
@@ -262,15 +256,15 @@ namespace AvoidTheBug3D {
   
   void GameLogic::process(const KeyInput &keyInput) {
     switch (gameState) {
-      case START_SCREEN:
-        processStartScreen(keyInput);
-        break;
-      case PLAYING:
-        processGame(keyInput);
-        break;
-      default:
-        throw std::runtime_error("Urecognised game state");
-        break;
+    case START_SCREEN:
+      processStartScreen(keyInput);
+      break;
+    case PLAYING:
+      processGame(keyInput);
+      break;
+    default:
+      throw std::runtime_error("Urecognised game state");
+      break;
     }
   }
   
@@ -280,17 +274,17 @@ namespace AvoidTheBug3D {
     //Uncomment for groovy nightfall effect :)
     /* renderer->lightIntensity += lightModifier;
      
-     if (renderer->lightIntensity < 0)
-     {
-     renderer->lightIntensity = 0.0f;
-     lightModifier = 0.01f;
-     }
+       if (renderer->lightIntensity < 0)
+       {
+       renderer->lightIntensity = 0.0f;
+       lightModifier = 0.01f;
+       }
      
-     if (renderer->lightIntensity > 1.0f)
-     {
-     renderer->lightIntensity = 1.0f;
-     lightModifier = -0.01f;
-     } */
+       if (renderer->lightIntensity > 1.0f)
+       {
+       renderer->lightIntensity = 1.0f;
+       lightModifier = -0.01f;
+       } */
     
     if (gameState == START_SCREEN) {
       
@@ -312,9 +306,9 @@ namespace AvoidTheBug3D {
       renderer->renderSurface(glm::vec3(0.0f, 0.5f, 0.0f), glm::vec3(-25.0f, GROUND_Y, MAX_Z),
                               glm::vec3(25.0f, GROUND_Y, MIN_Z), true);
       
-      renderer->render(goat);
-      renderer->render(bug);
-      renderer->render(tree);
+      renderer->render(goat.getModel(), goat.offset, goat.rotation, glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
+      renderer->render(bug.getModel(), bug.offset, bug.rotation, glm::vec4(0.0f, 0.0f, 0.0f, 1.0f));
+      renderer->render(tree.getModel(), tree.offset, tree.rotation, glm::vec4(1.0f, 1.0f, 0.0f, 1.0f));
       
     }
     renderer->swapBuffers();
