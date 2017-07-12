@@ -43,8 +43,13 @@ namespace AvoidTheBug3D {
     bahSound("resources/sounds/bah.ogg"){
     
     renderer = &Renderer::getInstance("Avoid the Bug 3D", 854, 480);
-    
     renderer->cameraPosition = glm::vec3(0.0f, 0.0f, 0.0f);
+
+    Image goatTexture("resources/models/Goat/goat.png");
+    renderer->generateTexture("goatTexture", goatTexture);
+
+    Image treeTexture("resources/models/Tree/tree.png");
+    renderer->generateTexture("treeTexture", treeTexture);
     
     Image startScreenTexture("resources/images/startScreen.png");
     renderer->generateTexture("startScreen", startScreenTexture);
@@ -306,9 +311,9 @@ namespace AvoidTheBug3D {
       renderer->renderSurface(glm::vec3(0.0f, 0.5f, 0.0f), glm::vec3(-25.0f, GROUND_Y, MAX_Z),
                               glm::vec3(25.0f, GROUND_Y, MIN_Z), true);
       
-      renderer->render(goat.getModel(), goat.offset, goat.rotation, glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
+      renderer->render(goat.getModel(), goat.offset, goat.rotation, "goatTexture");
       renderer->render(bug.getModel(), bug.offset, bug.rotation, glm::vec4(0.0f, 0.0f, 0.0f, 1.0f));
-      renderer->render(tree.getModel(), tree.offset, tree.rotation, glm::vec4(1.0f, 1.0f, 0.0f, 1.0f));
+      renderer->render(tree.getModel(), tree.offset, tree.rotation, "treeTexture");
       
     }
     renderer->swapBuffers();
