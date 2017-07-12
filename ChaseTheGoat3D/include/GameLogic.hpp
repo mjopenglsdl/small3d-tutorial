@@ -13,6 +13,7 @@
 #include <small3d/SceneObject.hpp>
 #include <small3d/Renderer.hpp>
 #include <small3d/Sound.hpp>
+#include <small3d/WavefrontLoader.hpp>
 
 #include "KeyInput.hpp"
 
@@ -31,8 +32,8 @@ namespace ChaseTheGoat3D {
 
   private:
 
-    SceneObject goat;
-    SceneObject bug;
+    SceneObject<WavefrontLoader> goat;
+    SceneObject<WavefrontLoader>  bug;
     
     Sound bahSound;
 
