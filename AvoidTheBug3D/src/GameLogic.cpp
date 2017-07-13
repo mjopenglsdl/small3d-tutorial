@@ -54,7 +54,6 @@ namespace AvoidTheBug3D {
     Image startScreenTexture("resources/images/startScreen.png");
     renderer->generateTexture("startScreen", startScreenTexture);
     
-    bug.colour = glm::vec4(0.2f, 0.2f, 0.2f, 1.0f);
     bug.setFrameDelay(2);
     bugVerticalSpeed = ROUND_2_DECIMAL(BUG_FLIGHT_HEIGHT / BUG_DIVE_DURATION);
     
@@ -311,9 +310,9 @@ namespace AvoidTheBug3D {
       renderer->renderSurface(glm::vec3(0.0f, 0.5f, 0.0f), glm::vec3(-25.0f, GROUND_Y, MIN_Z),
                               glm::vec3(25.0f, GROUND_Y, MAX_Z), true);
       
-      renderer->render(goat.getModel(), goat.offset, goat.rotation, "goatTexture");
-      renderer->render(bug.getModel(), bug.offset, bug.rotation, glm::vec4(0.0f, 0.0f, 0.0f, 1.0f));
-      renderer->render(tree.getModel(), tree.offset, tree.rotation, "treeTexture");
+      renderer->render(goat, "goatTexture");
+      renderer->render(bug, glm::vec4(0.0f, 0.0f, 0.0f, 1.0f));
+      renderer->render(tree, "treeTexture");
       
     }
     renderer->swapBuffers();
