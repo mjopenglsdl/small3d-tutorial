@@ -152,10 +152,9 @@ On Windows, you need to do this, adding some configuration parameters, depending
 	cmake -G "Visual Studio 14 2015 Win64" ..
 	cmake --build . --config Release
 
-This will compile our program. Inside the build/bin directory, there should be a ball (or ball.exe) executable. At this point though, it doesn't do much. Time to add our ball to the mix. Back in main.cpp, we include small3d's WavefrontLoader and SceneObject class, right under the inclusion of the renderer class (or above it, it doesn't matter):
+This will compile our program. Inside the build/bin directory, there should be a ball (or ball.exe) executable. At this point though, it doesn't do much. Time to add our ball to the mix. Back in main.cpp, we include small3d's SceneObject class, right under the inclusion of the renderer class (or above it, it doesn't matter):
 
 	#include <small3d/Renderer.hpp>
-	#include <small3d/WavefrontLoader.hpp>
 	#include <small3d/SceneObject.hpp>
 
 Now we need the GLFW header files:
@@ -207,13 +206,7 @@ We create the ball:
 
 	SceneObject<WavefrontLoader> ball("ball", "resources/ball.obj");
 
-Let's say it's yellow:
-
-	ball.colour = glm::vec4(1.0f, 1.0f, 0.0f, 1.0f);
-
-small3d uses vectors a lot as parameters for convenience. In this case, the vector symbolises an rgb colour, together with the alpha channel (last component).
-
-On the other hand, when positioning the ball, the components are in order, x (-left, +right), y(+up, -down), and z(-away from the camera, +towards the camera):
+small3d uses vectors a lot as parameters for convenience. When positioning the ball, the components are in order, x (-left, +right), y(+up, -down), and z(-away from the camera, +towards the camera):
 
 	ball.offset = glm::vec3(0.0f, -1.0f, -8.0f);
 
@@ -246,9 +239,9 @@ Ok, the ball is positioned. Now we need to actually draw it. We clear the screen
 
 	renderer->clearScreen();
 
-Then we render the ball:
+Then we render the ball. The second parameter is the colour. Let's say it's yellow (the vector below symbolises an rgb colour, together with the alpha channel):
 	
-	renderer->render(ball.getModel(), ball.offset, ball.rotation, ball.colour);
+	renderer->render(ball.getModel(), glm::vec4(1.0f, 1.0f, 0.0f, 1.0f));
 
 We are using a double-buffered system (we draw on one buffer, while the user is looking at the other one), so we also need to swap the buffers:
 

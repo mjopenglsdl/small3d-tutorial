@@ -1,5 +1,4 @@
 #include <small3d/Renderer.hpp>
-#include <small3d/WavefrontLoader.hpp>
 #include <small3d/SceneObject.hpp>
 #include <GLFW/glfw3.h>
 
@@ -38,8 +37,7 @@ int main(int argc, char **argv) {
 
   GLFWwindow* window = renderer->getWindow();
 
-  SceneObject<WavefrontLoader> ball("ball", "resources/ball.obj");
-  ball.colour = glm::vec4(1.0f, 1.0f, 0.0f, 1.0f);
+  SceneObject ball("ball", "resources/ball.obj");
   ball.offset = glm::vec3(0.0f, -1.0f, -8.0f);
 
   glfwSetKeyCallback(window, keyCallback);
@@ -60,7 +58,7 @@ int main(int argc, char **argv) {
       ball.offset.x += 0.1f;
 	  
     renderer->clearScreen();
-    renderer->render(ball.getModel(), ball.offset, ball.rotation, ball.colour);
+    renderer->render(ball, glm::vec4(1.0f, 1.0f, 0.0f, 1.0f));
     renderer->swapBuffers();
 		
   }
