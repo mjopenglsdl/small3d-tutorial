@@ -57,7 +57,6 @@ namespace ChaseTheGoat3D {
     Image treeTexture("resources/models/Tree/tree.png");
     renderer->generateTexture("treeTexture", treeTexture);
     
-    bug.colour = glm::vec4(0.2f, 0.2f, 0.2f, 1.0f);
     bug.setFrameDelay(2);
     
     gameState = START_SCREEN;
@@ -250,8 +249,8 @@ namespace ChaseTheGoat3D {
       renderer->renderTexture("ground", glm::vec3(-25.0f, GROUND_Y, MIN_Z),
 			      glm::vec3(25.0f, GROUND_Y, MAX_Z), true);
       
-      renderer->render(goat.getModel(), goat.offset, goat.rotation, "goatTexture");
-      renderer->render(bug.getModel(), bug.offset, bug.rotation, glm::vec4(0.0f, 0.0f, 0.0f, 1.0f));
+      renderer->render(goat, "goatTexture");
+      renderer->render(bug, glm::vec4(0.0f, 0.0f, 0.0f, 1.0f));
       
     }
     renderer->swapBuffers();
