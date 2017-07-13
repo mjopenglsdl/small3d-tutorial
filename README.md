@@ -152,9 +152,10 @@ On Windows, you need to do this, adding some configuration parameters, depending
 	cmake -G "Visual Studio 14 2015 Win64" ..
 	cmake --build . --config Release
 
-This will compile our program. Inside the build/bin directory, there should be a ball (or ball.exe) executable. At this point though, it doesn't do much. Time to add our ball to the mix. Back in main.cpp, we include small3d's SceneObject class, right under the inclusion of the renderer class (or above it, it doesn't matter):
+This will compile our program. Inside the build/bin directory, there should be a ball (or ball.exe) executable. At this point though, it doesn't do much. Time to add our ball to the mix. Back in main.cpp, we include small3d's WavefrontLoader and SceneObject class, right under the inclusion of the renderer class (or above it, it doesn't matter):
 
 	#include <small3d/Renderer.hpp>
+	#include <small3d/WavefrontLoader.hpp>
 	#include <small3d/SceneObject.hpp>
 
 Now we need the GLFW header files:
@@ -167,30 +168,30 @@ We also need to be using the small3d namespace, so this goes under our include s
 	
 We also need to write the logic that will be detecting key presses:
 
-	bool down, left, right, up, esc, enter;
+	bool downkey, leftkey, rightkey, upkey, esckey;
 
 	void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
 	{
 	if (key == GLFW_KEY_DOWN && action == GLFW_PRESS)
-      down = true;
+      downkey = true;
 	if (key == GLFW_KEY_UP && action == GLFW_PRESS)
-      up = true;
+      upkey = true;
 	if (key == GLFW_KEY_LEFT && action == GLFW_PRESS)
-      left = true;
+      leftkey = true;
 	if (key == GLFW_KEY_RIGHT && action == GLFW_PRESS)
-      right = true;
+      rightkey = true;
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-      esc = true;
+      esckey = true;
 	if (key == GLFW_KEY_DOWN && action == GLFW_RELEASE)
-      down = false;
+      downkey = false;
 	if (key == GLFW_KEY_UP && action == GLFW_RELEASE)
-      up = false;
+      upkey = false;
 	if (key == GLFW_KEY_LEFT && action == GLFW_RELEASE)
-      left = false;
+      leftkey = false;
 	if (key == GLFW_KEY_RIGHT && action == GLFW_RELEASE)
-      right = false;
+      rightkey = false;
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE)
-      esc = false;
+      esckey = false;
 
 	}
 
@@ -204,7 +205,7 @@ We will later need to access the window of the application, in order to pick up 
 
 We create the ball:
 
-	SceneObject ball("ball", "resources/ball.obj");
+	SceneObject<WavefrontLoader> ball("ball", "resources/ball.obj");
 
 Let's say it's yellow:
 
@@ -225,20 +226,20 @@ Now in every iteration, we need to check whether we want to exit the program. Le
 	while (!glfwWindowShouldClose(window) && !esc) {
 
 	glfwPollEvents();
-		if (esc)
+		if (esckey)
 			break;
 
 If after that we are still in the loop (so, no Esc key pressed), we will want to move the ball around with the keyboard. 
 
 We will have the up arrow move the ball away from the camera. Down will do the opposite. Guess what left and right will do :)
 
-	if (up)
+	if (upkey)
       ball.offset.z -= 0.1f;
-    else if (down)
+    else if (downkey)
       ball.offset.z += 0.1f;
-    else if (left)
+    else if (leftkey)
       ball.offset.x -= 0.1f;
-    else if (right)
+    else if (rightkey)
       ball.offset.x += 0.1f;
 
 Ok, the ball is positioned. Now we need to actually draw it. We clear the screen first:
@@ -247,7 +248,7 @@ Ok, the ball is positioned. Now we need to actually draw it. We clear the screen
 
 Then we render the ball:
 	
-	renderer->render(ball);
+	renderer->render(ball.getModel(), ball.offset, ball.rotation, ball.colour);
 
 We are using a double-buffered system (we draw on one buffer, while the user is looking at the other one), so we also need to swap the buffers:
 
