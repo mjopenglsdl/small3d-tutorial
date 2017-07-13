@@ -232,23 +232,23 @@ namespace ChaseTheGoat3D {
     
     if (gameState == START_SCREEN) {
       
-      renderer->renderTexture("startScreen", glm::vec3(-1.0f, -1.0f, 1.0f),
-			      glm::vec3(1.0f, 1.0f, 1.0f));
+      renderer->renderTexture("startScreen", glm::vec3(-1.0f, 1.0f, 1.0f),
+			      glm::vec3(1.0f, -1.0f, 1.0f));
       
       if (seconds != 0) {
         renderer->write("Goat not bitten for " + intToStr(seconds) + " seconds",
-			glm::vec3(1.0f, 0.5f, 0.0f), glm::vec2(-0.95f, -0.8f), glm::vec2(0.0f, -0.6f));
+			glm::vec3(1.0f, 0.5f, 0.0f), glm::vec2(-0.95f, -0.6f), glm::vec2(0.0f, -0.8f));
       }
       
     } else {
       
-      renderer->renderTexture("sky", glm::vec3(-1.0f, -1.0f, 1.0f),
-			      glm::vec3(1.0f, 1.0f, 1.0f));
+      renderer->renderTexture("sky", glm::vec3(-1.0f, 1.0f, 1.0f),
+			      glm::vec3(1.0f, -1.0f, 1.0f));
       
       // Draw the background
       
-      renderer->renderTexture("ground", glm::vec3(-25.0f, GROUND_Y, MAX_Z),
-			      glm::vec3(25.0f, GROUND_Y, MIN_Z), true);
+      renderer->renderTexture("ground", glm::vec3(-25.0f, GROUND_Y, MIN_Z),
+			      glm::vec3(25.0f, GROUND_Y, MAX_Z), true);
       
       renderer->render(goat.getModel(), goat.offset, goat.rotation, "goatTexture");
       renderer->render(bug.getModel(), bug.offset, bug.rotation, glm::vec4(0.0f, 0.0f, 0.0f, 1.0f));
