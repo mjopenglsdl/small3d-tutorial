@@ -231,7 +231,7 @@ namespace ChaseTheGoat3D {
     
     if (gameState == START_SCREEN) {
       
-      renderer->renderTexture("startScreen", glm::vec3(-1.0f, 1.0f, 1.0f),
+      renderer->renderRectangle("startScreen", glm::vec3(-1.0f, 1.0f, 1.0f),
 			      glm::vec3(1.0f, -1.0f, 1.0f));
       
       if (seconds != 0) {
@@ -241,12 +241,12 @@ namespace ChaseTheGoat3D {
       
     } else {
       
-      renderer->renderTexture("sky", glm::vec3(-1.0f, 1.0f, 1.0f),
+      renderer->renderRectangle("sky", glm::vec3(-1.0f, 1.0f, 1.0f),
 			      glm::vec3(1.0f, -1.0f, 1.0f));
       
       // Draw the background
       
-      renderer->renderTexture("ground", glm::vec3(-25.0f, GROUND_Y, MIN_Z),
+      renderer->renderRectangle("ground", glm::vec3(-25.0f, GROUND_Y, MIN_Z),
 			      glm::vec3(25.0f, GROUND_Y, MAX_Z), true);
       
       renderer->render(goat, "goatTexture");

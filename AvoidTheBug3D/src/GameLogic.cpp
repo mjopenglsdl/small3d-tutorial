@@ -292,7 +292,7 @@ namespace AvoidTheBug3D {
     
     if (gameState == START_SCREEN) {
       
-      renderer->renderTexture("startScreen", glm::vec3(-1.0f, 1.0f, 1.0f),
+      renderer->renderRectangle("startScreen", glm::vec3(-1.0f, 1.0f, 1.0f),
                               glm::vec3(1.0f, -1.0f, 1.0f));
       
       if (seconds != 0) {
@@ -303,11 +303,11 @@ namespace AvoidTheBug3D {
     } else {
       
       // Draw the sky
-      renderer->renderSurface(glm::vec3(0.4f, 0.37f, 1.0f), glm::vec3(-1.0f, 1.0f, 1.0f),
+      renderer->renderRectangle(glm::vec4(0.4f, 0.37f, 1.0f, 1.0f), glm::vec3(-1.0f, 1.0f, 1.0f),
                               glm::vec3(1.0f, -1.0f, 1.0f));
       
       // Draw the ground
-      renderer->renderSurface(glm::vec3(0.0f, 0.5f, 0.0f), glm::vec3(-25.0f, GROUND_Y, MIN_Z),
+      renderer->renderRectangle(glm::vec4(0.0f, 0.5f, 0.0f, 1.0f), glm::vec3(-25.0f, GROUND_Y, MIN_Z),
                               glm::vec3(25.0f, GROUND_Y, MAX_Z), true);
       
       renderer->render(goat, "goatTexture");
