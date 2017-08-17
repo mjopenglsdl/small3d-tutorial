@@ -24,7 +24,6 @@
 #define GOAT_SPEED 0.05f
 
 #include <memory>
-#include <small3d/MathFunctions.hpp>
 #include <stdexcept>
 #include <cmath>
 #include "GameLogic.hpp"
@@ -55,7 +54,7 @@ namespace AvoidTheBug3D {
     renderer->generateTexture("startScreen", startScreenTexture);
     
     bug.setFrameDelay(2);
-    bugVerticalSpeed = ROUND_2_DECIMAL(BUG_FLIGHT_HEIGHT / BUG_DIVE_DURATION);
+    bugVerticalSpeed = BUG_FLIGHT_HEIGHT / BUG_DIVE_DURATION;
     
     tree.offset = glm::vec3(2.6f, GROUND_Y, -8.0f);
     tree.rotation = glm::vec3(0.0f, -0.5f, 0.0f);
@@ -154,10 +153,10 @@ namespace AvoidTheBug3D {
     
     float xDistance = bug.offset.x - goat.offset.x;
     float zDistance = bug.offset.z - goat.offset.z;
-    float distance = ROUND_2_DECIMAL(sqrt(xDistance * xDistance + zDistance * zDistance));
+    float distance = sqrt(xDistance * xDistance + zDistance * zDistance);
     
-    float goatRelX = ROUND_2_DECIMAL(xDistance / distance);
-    float goatRelZ = ROUND_2_DECIMAL(zDistance / distance);
+    float goatRelX = xDistance / distance;
+    float goatRelZ = zDistance / distance;
     
     float bugDirectionX = -sin(bug.rotation.y);
     float bugDirectionZ = cos(bug.rotation.y);

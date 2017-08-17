@@ -25,7 +25,6 @@
 
 
 #include <memory>
-#include <small3d/MathFunctions.hpp>
 #include <stdexcept>
 #include "GameLogic.hpp"
 
@@ -87,10 +86,10 @@ namespace ChaseTheGoat3D {
     
     float xDistance = bug.offset.x - goat.offset.x;
     float zDistance = bug.offset.z - goat.offset.z;
-    float distance = ROUND_2_DECIMAL(sqrt(xDistance * xDistance + zDistance * zDistance));
+    float distance = sqrt(xDistance * xDistance + zDistance * zDistance);
     
-    float goatRelX = ROUND_2_DECIMAL(xDistance / distance);
-    float goatRelZ = ROUND_2_DECIMAL(zDistance / distance);
+    float goatRelX = xDistance / distance;
+    float goatRelZ = zDistance / distance;
     
     float goatDirectionX = -sin(goat.rotation.y);
     float goatDirectionZ = cos(goat.rotation.y);
