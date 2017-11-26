@@ -95,11 +95,7 @@ Let's see if it works. First of all, we need to add the conan repositories that 
 
 	conan remote add bintraydimi309 https://api.bintray.com/conan/dimi309/conan-packages
 	
-Also add the following bintray repository (that's where I get the portaudio dependency from):
-
-	conan remote add bintrayjgsogo https://api.bintray.com/conan/jgsogo/conan-packages
-
-Finally, add the bincrafters bintray repository. [Bincrafters](https://bincrafters.github.io/) is a group of OSS developers with a shared interest in making binary software packages:
+Also, add the bincrafters bintray repository. [Bincrafters](https://bincrafters.github.io/) is a group of OSS developers with a shared interest in making binary software packages:
 
 	conan remote add bintraybincrafters https://api.bintray.com/conan/bincrafters/public-conan
 
