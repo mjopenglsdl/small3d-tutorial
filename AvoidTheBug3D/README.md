@@ -32,7 +32,7 @@ On Microsoft Windows, better do it like this:
 	mkdir build
 	cd build
 	conan install .. --build missing
-	cmake -G "Visual Studio 14 2015 Win64" ..
+	cmake -G "Visual Studio 15 2017 Win64" ..
 	cmake --build . --config Release
 
 *(You may need a different cmake -G command, depending on your version of Visual Studio.)*
