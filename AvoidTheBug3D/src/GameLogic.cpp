@@ -266,7 +266,7 @@ namespace AvoidTheBug3D {
       processGame(keyInput);
       break;
     default:
-      throw std::runtime_error("Urecognised game state");
+      throw std::runtime_error("Unrecognised game state");
       break;
     }
   }
