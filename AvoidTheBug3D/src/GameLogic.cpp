@@ -6,17 +6,12 @@
  *     License: BSD 3-Clause License (see LICENSE file)
  */
 
-#include <memory>
-#include <stdexcept>
-#include <cmath>
-#include "GameLogic.hpp"
-
 
 #define MAX_Z -1.0f
 #define MIN_Z -24.0f
 
 #define GROUND_Y -1.0f
-#define FULL_ROTATION (M_PI*2) // 360 degrees in radians
+#define FULL_ROTATION 6.28f // More or less 360 degrees in radians
 
 #define BUG_ROTATION_SPEED 0.12f
 #define BUG_DIVE_TILT 0.8f
@@ -27,6 +22,11 @@
 
 #define GOAT_ROTATION_SPEED 0.1f
 #define GOAT_SPEED 0.05f
+
+#include <memory>
+#include <stdexcept>
+#include <cmath>
+#include "GameLogic.hpp"
 
 
 using namespace small3d;
