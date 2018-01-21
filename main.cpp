@@ -1,4 +1,4 @@
-#include <small3d/Renderer.hpp>
+#include <small3d/OpenGL/Renderer.hpp>
 #include <small3d/SceneObject.hpp>
 #include <GLFW/glfw3.h>
 
