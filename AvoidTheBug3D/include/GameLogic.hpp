@@ -11,7 +11,7 @@
 #include <memory>
 #include <small3d/Logger.hpp>
 #include <small3d/SceneObject.hpp>
-#include <small3d/OpenGL/Renderer.hpp>
+#include <small3d/Renderer.hpp>
 #include <small3d/Sound.hpp>
 
 #include "KeyInput.hpp"
