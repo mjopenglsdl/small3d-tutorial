@@ -46,7 +46,7 @@ Save the exported file as "ball.obj" in the "resources" directory, created earli
 
 Now we are ready for the code. Create a file called "main.cpp" in the "ball" directory, with your editor or IDE. For starters let's just make our program use small3d. One class that we will definitely need is Renderer. This one creates a window and, as the name implies, takes care of all the rendering. So here is our main.cpp, with Renderer included:
 
-	#include <small3d/Renderer.hpp>
+	#include <small3d/OpenGL/Renderer.hpp>
 	
 	int main(int argc, char **argv) {
 		
@@ -160,7 +160,7 @@ On Windows, you need to do this, adding some configuration parameters, depending
 
 This will compile our program. Inside the build/bin directory, there should be a ball (or ball.exe) executable. At this point though, it doesn't do much. Time to add our ball to the mix. Back in main.cpp, we include small3d's SceneObject class, right under the inclusion of the renderer class (or above it, it doesn't matter):
 
-	#include <small3d/Renderer.hpp>
+	#include <small3d/OpenGL/Renderer.hpp>
 	#include <small3d/SceneObject.hpp>
 
 Now we need the GLFW header files:
